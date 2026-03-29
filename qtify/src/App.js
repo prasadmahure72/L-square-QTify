@@ -11,7 +11,7 @@ function App() {
       <div className="App">
         <Navbar />
         <Hero />
-        <Section title="Top Albums" apiUrl="https://qtify-backend.labs.crio.do/albums/top" defaultView="grid" />
+        <Section title="Top Albums" apiUrl="https://qtify-backend.labs.crio.do/albums/top" defaultView="carousel" />
         <Section title="New Albums" apiUrl="https://qtify-backend.labs.crio.do/albums/new" defaultView="carousel" />
         <Songs />
       </div>

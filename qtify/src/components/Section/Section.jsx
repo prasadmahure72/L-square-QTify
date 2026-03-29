@@ -29,7 +29,7 @@ function Section({ title, apiUrl, defaultView = "grid", showToggle = true, child
             className={styles.toggleBtn}
             onClick={() => setView(isGrid ? "carousel" : "grid")}
           >
-            {isGrid ? "Collapse" : "show all"}
+            {isGrid ? "Collapse" : "Show all"}
           </button>
         )}
       </div>
