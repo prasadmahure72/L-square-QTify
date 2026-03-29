@@ -3,7 +3,7 @@ import styles from "./Card.module.css";
 
 function Card({ image, title, follows }) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} data-testid="card">
       <div className={styles.imageWrapper}>
         <img src={image} alt={title} className={styles.image} />
         <div className={styles.chipWrapper}>
