@@ -24,22 +24,21 @@ test("should match the count of top, and new album cards with their respective A
 test("should show cards for Top and New Albums and verify the 'Show All' functionality", async () => {
   render(<App />);
 
-  // Both sections render cards by default (grid view)
+  // Both sections render cards — Top Albums in grid, New Albums in carousel
   const initialCards = await screen.findAllByTestId("card");
   expect(initialCards.length).toBe(mockData.length * 2);
 
-  // Both sections show "Collapse" by default
-  const collapseButtons = screen.getAllByText("Collapse");
-  expect(collapseButtons.length).toBe(2);
+  // Top Albums shows "Collapse", New Albums shows "Show all" by default
+  expect(screen.getByText("Collapse")).toBeInTheDocument();
+  expect(screen.getByText("Show all")).toBeInTheDocument();
 
-  // Click "Collapse" on Top Albums → carousel shows, button becomes "Show All"
-  fireEvent.click(collapseButtons[0]);
-  expect(screen.getAllByText("Show All").length).toBeGreaterThanOrEqual(1);
-
-  // Cards still in DOM (carousel renders them)
+  // Click "Show all" on New Albums → switches to grid, button becomes "Collapse"
+  fireEvent.click(screen.getByText("Show all"));
+  expect(screen.getAllByText("Collapse").length).toBe(2);
   expect(screen.getAllByTestId("card").length).toBe(mockData.length * 2);
 
-  // Click "Show All" → grid restored, button back to "Collapse"
-  fireEvent.click(screen.getAllByText("Show All")[0]);
-  expect(screen.getAllByText("Collapse").length).toBe(2);
+  // Click "Collapse" on Top Albums → switches to carousel, button becomes "Show all"
+  fireEvent.click(screen.getAllByText("Collapse")[0]);
+  expect(screen.getByText("Show all")).toBeInTheDocument();
+  expect(screen.getAllByTestId("card").length).toBe(mockData.length * 2);
 });
