@@ -4,16 +4,18 @@ import Card from "../Card/Card";
 import Carousel from "../Carousel/Carousel";
 import styles from "./Section.module.css";
 
-function Section({ title, apiUrl, defaultView = "grid" }) {
+function Section({ title, apiUrl, defaultView = "grid", showToggle = true, children }) {
   const [albums, setAlbums] = useState([]);
   // "grid" = showing full grid, "carousel" = showing carousel
   const [view, setView] = useState(defaultView);
 
   useEffect(() => {
-    axios
-      .get(apiUrl)
-      .then((res) => setAlbums(res.data))
-      .catch((err) => console.error(err));
+    if (apiUrl) {
+      axios
+        .get(apiUrl)
+        .then((res) => setAlbums(res.data))
+        .catch((err) => console.error(err));
+    }
   }, [apiUrl]);
 
   const isGrid = view === "grid";
@@ -22,15 +24,19 @@ function Section({ title, apiUrl, defaultView = "grid" }) {
     <div className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        <button
-          className={styles.toggleBtn}
-          onClick={() => setView(isGrid ? "carousel" : "grid")}
-        >
-          {isGrid ? "Collapse" : "Show all"}
-        </button>
+        {showToggle && (
+          <button
+            className={styles.toggleBtn}
+            onClick={() => setView(isGrid ? "carousel" : "grid")}
+          >
+            {isGrid ? "Collapse" : "Show all"}
+          </button>
+        )}
       </div>
 
-      {isGrid ? (
+      {children ? (
+        children
+      ) : isGrid ? (
         <div className={styles.grid}>
           {albums.map((album) => (
             <Card
