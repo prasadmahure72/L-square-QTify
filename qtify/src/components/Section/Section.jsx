@@ -14,7 +14,7 @@ function Section({ title, apiUrl, defaultView = "grid", showToggle = true, child
       axios
         .get(apiUrl)
         .then((res) => setAlbums(res.data))
-        .catch((err) => console.error(err));
+        .catch(() => {});
     }
   }, [apiUrl]);
 

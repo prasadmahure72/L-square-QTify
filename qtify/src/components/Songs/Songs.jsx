@@ -18,12 +18,12 @@ function Songs() {
     axios
       .get("https://qtify-backend.labs.crio.do/songs")
       .then((res) => { if (mounted) setSongs(res.data); })
-      .catch((err) => console.error(err));
+      .catch(() => {});
 
     axios
       .get("https://qtify-backend.labs.crio.do/genres")
       .then((res) => { if (mounted) setGenres(res.data.data ?? res.data); })
-      .catch((err) => console.error(err));
+      .catch(() => {});
 
     return () => { mounted = false; };
   }, []);
