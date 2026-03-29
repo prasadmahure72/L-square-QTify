@@ -10,6 +10,8 @@ beforeEach(() => {
   axios.get.mockImplementation((url) => {
     if (url.includes("/albums/top")) return Promise.resolve({ data: mockData });
     if (url.includes("/albums/new")) return Promise.resolve({ data: mockData });
+    if (url.includes("/songs")) return Promise.resolve({ data: [] });
+    if (url.includes("/genres")) return Promise.resolve({ data: [] });
     return Promise.resolve({ data: [] });
   });
 });
