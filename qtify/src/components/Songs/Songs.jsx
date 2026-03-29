@@ -13,15 +13,19 @@ function Songs() {
   const [selectedGenre, setSelectedGenre] = useState("all");
 
   useEffect(() => {
+    let mounted = true;
+
     axios
       .get("https://qtify-backend.labs.crio.do/songs")
-      .then((res) => setSongs(res.data))
+      .then((res) => { if (mounted) setSongs(res.data); })
       .catch((err) => console.error(err));
 
     axios
       .get("https://qtify-backend.labs.crio.do/genres")
-      .then((res) => setGenres(res.data.data ?? res.data))
+      .then((res) => { if (mounted) setGenres(res.data.data ?? res.data); })
       .catch((err) => console.error(err));
+
+    return () => { mounted = false; };
   }, []);
 
   const filteredSongs =
