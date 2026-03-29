@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 160px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.chipWrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
